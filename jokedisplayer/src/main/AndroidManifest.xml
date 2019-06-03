@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.atmko.jokedisplayer">
+
+    <application>
+        <activity
+            android:name="com.atmko.jokedisplayer.JokeDisplayActivity"
+            android:launchMode="singleTop"/>
+    </application>
+
+</manifest>
