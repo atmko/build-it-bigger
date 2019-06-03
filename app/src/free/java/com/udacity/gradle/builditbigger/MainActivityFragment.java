@@ -4,14 +4,15 @@
 
 package com.udacity.gradle.builditbigger;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
+import com.atmko.jokedisplayer.JokeDisplayActivity;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
@@ -19,7 +20,8 @@ import com.google.android.gms.ads.AdView;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment extends Fragment {
+public class MainActivityFragment extends Fragment
+        implements EndpointsAsyncTask.StartJokeDisplayListener {
 
     public MainActivityFragment() {
     }
@@ -34,7 +36,7 @@ public class MainActivityFragment extends Fragment {
         tellJokeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tellJoke();
+                new EndpointsAsyncTask(MainActivityFragment.this).execute();
             }
         });
 
@@ -49,7 +51,13 @@ public class MainActivityFragment extends Fragment {
         return root;
     }
 
-    public void tellJoke() {
-        Toast.makeText(getContext(), getContext().getString(R.string.notify_paid_version), Toast.LENGTH_SHORT).show();
+    @Override
+    public void startJokeActivity(String jokeString) {
+        Intent jokeDisplayIntent = new Intent(getContext(), JokeDisplayActivity.class);
+        jokeDisplayIntent.putExtra(JokeDisplayActivity.DISPLAY_JOKE_KEY, jokeString);
+
+        assert getContext() != null;
+
+        getContext().startActivity(jokeDisplayIntent);
     }
 }

@@ -33,15 +33,11 @@ public class MainActivityFragment extends Fragment
         tellJokeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tellJoke();
+                new EndpointsAsyncTask(MainActivityFragment.this).execute();
             }
         });
 
         return root;
-    }
-
-    private void tellJoke() {
-        new EndpointsAsyncTask(this).execute();
     }
 
     @Override
